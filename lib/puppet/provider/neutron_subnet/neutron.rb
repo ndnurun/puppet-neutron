@@ -220,9 +220,10 @@ Puppet::Type.type(:neutron_subnet).provide(
       fail("Not managing Neutron_subnet[#{@resource[:name]}] due to earlier Neutron API failures.")
     end
     unless values.empty?
-      opts = ["#{name}", "--allocation-pool"]
+      opts = ["#{name}"]
       for value in values
-        opts << value
+        opts << "--allocation-pool"
+        opts << "#{value}"
       end
       auth_neutron('subnet-update', opts)
     end
